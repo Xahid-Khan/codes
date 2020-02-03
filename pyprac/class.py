@@ -93,45 +93,100 @@ defaultFamily = Family()
 # simin.female_children()
 # simin.activities()
 
+# class Card:
+#     def __init__(self, suit, rank):
+#         self.suit = suit
+#         self.rank = rank
+
+#     def printCard(self):
+#         print(self.suit, self.rank)
+#     def __str__(self):
+#         return self.suit + " " + str(self.rank)
+
+# card1 = Card("spades", 4)
+# card2 = Card("hearts", 12)
+# print(card1.printCard())
+# print(card1)
+
+#print(card2.printCard())
+
+#class Deck:
+#     def __init__(self):
+#         self.l = []
+#         for i in range(1, 11):
+#             self.l.append(Card("spades", i))
+#     def printDeck(self):
+#         for i in self.l:
+#             print(i)
+# print("I am creating a deck.")
+# deck1 = Deck()
+# print(deck1.printDeck())
+import sys
+from random import randint
+
 class Card:
     def __init__(self, suit, rank):
         self.suit = suit
         self.rank = rank
-
+    def rankNumToStr(self, rank):
+        if rank == 1:
+            return "A"
+        if rank == 11:
+            return "J"
+        if rank == 12:
+            return "Q"
+        if rank == 13:
+            return "K"
+        
+        return rank
+    def suitStrToSym(self, suit):
+        if suit == "Spades":
+            return u"\u2660"
+        else:
+            return suit
+       
     def printCard(self):
         print(self.suit, self.rank)
     def __str__(self):
-        return self.suit + " " + str(self.rank)
+        return self.suitStrToSym(self.suit) + " " + str(self.rankNumToStr(self.rank))
+    
 
-card1 = Card("spades", 4)
-card2 = Card("hearts", 12)
-print(card1.printCard())
-print(card1)
-
-#print(card2.printCard())
-
+    
 class Deck:
     def __init__(self):
         self.l = []
-        for i in range(1, 11):
-            self.l.append(Card("spades", i))
+        self.suits = ["Spades", "Hearts", "Clubs", "Diamonds"]
+        for i in range(1, 14):
+            for suit in self.suits:
+                self.l.append(Card(suit, i))
+        self.shuffle()
+        return
+    
+    def shuffle(self):
+        for i in range(100):
+#             randNum1 = randint(0, 51)
+#             randNum2 = randint(0, 51)
+#             card1 = self.l[randNum1]
+#             self.l[randNum1] = self.l[randNum2]
+#             self.l[randNum2] = card1
+            randNum = randint(0, 51)
+            card0 = self.l[0]
+            self.l[0] = self.l[randNum]
+            self.l[randNum] = card0
+            self.l.reverse()
+        
     def printDeck(self):
         for i in self.l:
             print(i)
-print("I am creating a deck.")
 deck1 = Deck()
+print(deck1.l[0])
 print(deck1.printDeck())
-
-class Deck:
-    def __init__(self):
-        self.l = []
-        for i in range(1, 11):
-            self.l.append(Card(suit, i))
-            
+# deck1.suffle()
+# print("############## shuffled ############")
+# print(deck1.printDeck())
 
 
 
-print("I am learning about classes")
 
 
 
